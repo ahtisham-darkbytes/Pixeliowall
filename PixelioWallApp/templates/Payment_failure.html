@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Payment Failed - Pixeliowall{% endblock %}
+
+{% block content %}
+<section class="payment-status">
+  <div class="container">
+    <div class="status-container">
+      <div class="status-icon failure-icon">
+        <i class="fas fa-times-circle"></i>
+      </div>
+      <h2 class="status-title">Payment Failed</h2>
+      <p class="status-message">
+        Unfortunately, your payment could not be processed. Please try again or use a different payment method.
+      </p>
+
+      <!-- Image below message -->
+      <div class="status-image">
+        <img src="{% static 'images/technology.webp' %}" alt="Payment Failed" />
+      </div>
+
+      <div class="button-group">
+        <a href="{% url 'home' %}" class="btn-generic button-outline">Go Back Home</a>
+        <a href="{% url 'explore' %}" class="btn-generic button-filled">Try Again</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

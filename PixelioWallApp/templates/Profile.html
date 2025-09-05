@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
+
+<!-- Profile Section -->
+<div class="profile-container">
+  <!-- User Details -->
+  <div class="profile-details">
+    <h2>My Profile</h2>
+    <form>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="John Doe" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="john@example.com" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="********" />
+
+      <label for="profile-pic">Profile Picture</label>
+      <input type="file" id="profile-pic" />
+
+
+      <button type="submit" class="btn-generic button-filled">
+        Update Profile
+      </button>
+    </form>
+  </div>
+
+  <!-- Downloaded Items -->
+  <div class="downloads">
+    <h2>My Downloads</h2>
+    <div class="download-grid">
+      <div class="download-item">
+        <img src="{%static 'images/travel.webp' %}" alt="Downloaded Item" />
+        <p>Mountain Landscape</p>
+      </div>
+      <div class="download-item">
+        <img src="{%static 'images/5.webp' %}" alt="Downloaded Item" />
+        <p>Beach Sunset</p>
+      </div>
+      <div class="download-item">
+        <img src="{%static 'images/art.webp' %}" alt="Downloaded Item" />
+        <p>City Skyline</p>
+      </div>
+      <div class="download-item">
+        <img src="{%static 'images/desert.webp' %}" alt="Downloaded Item" />
+        <p>Forest Path</p>
+      </div>
+    </div>
+  </div>
+
+ 
+</div>
+
+{% endblock %}

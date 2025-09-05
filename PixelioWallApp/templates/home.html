@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% load static %} {% block title %}Pixeliowall -
+Home{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h2 class="hero-title">
+        The best free stock photos, royalty free wallpapers shared by creators.
+      </h2>
+      <p class="hero-subtitle">
+        Over 3.2 million+ high quality wallpapers and images.
+      </p>
+
+      <form class="search-form" id="searchForm">
+        <div class="search-container">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for photos"
+            class="search-input"
+          />
+          <button type="submit" class="search-btn">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="trending">
+        <p class="trending-label">Trending:</p>
+        <div class="trending-tags">
+          <button class="trending-tag">Nature</button>
+          <button class="trending-tag">Business</button>
+          <button class="trending-tag">Food</button>
+          <button class="trending-tag">Travel</button>
+          <button class="trending-tag">Technology</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Section -->
+<section class="main-content">
+  <div class="container">
+    <div class="filters-row">
+      <div class="filter-buttons">
+        <button class="btn filter-btn btn-outline" data-filter="all">
+          All
+        </button>
+        <button class="btn filter-btn btn-outline" data-filter="free">
+          Free
+        </button>
+        <button class="btn filter-btn btn-outline" data-filter="paid">
+          Paid
+        </button>
+      </div>
+
+      <div class="filter-dropdowns">
+        <select id="sortFilter">
+          <option value="default" selected disabled hidden>Sort By</option>
+          <option value="price-asc">Price Low to High</option>
+          <option value="price-desc">Price High to Low</option>
+          <option value="date-desc">Date new to old</option>
+          <option value="date-asc">Date old to new</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h3 class="section-title">Free Stock Photos</h3>
+      <p class="section-subtitle">
+        Discover our collection of beautiful, high-quality images
+      </p>
+    </div>
+
+    <div class="masonry-grid" id="masonryGrid">
+      <!-- Images inserted by JS -->
+    </div>
+
+    <div id="loader" class="loader">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %} {% block extra_scripts %} {% endblock %}

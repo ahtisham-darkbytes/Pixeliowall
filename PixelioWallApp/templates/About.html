@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About - Pixeliowall{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="about-hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>About Pixeliowall</h1>
+      <p>Free high-quality stock photos and wallpapers shared by creators for creators.</p>
+    </div>
+  </div>
+</section>
+
+<!-- About Sections -->
+<div class="container">
+  <section class="about-section">
+    <h2>Our Mission</h2>
+    <p>Pixeliowall is dedicated to empowering creators by providing free, high-resolution photos and wallpapers
+      that can be used for personal or commercial projects. We aim to make beautiful imagery accessible to
+      everyone.</p>
+
+    <h2 style="margin-top: 2.5em">Why Choose Pixeliowall?</h2>
+    <p>We curate a wide variety of high-quality images, from stunning landscapes to lifestyle photography. Our
+      platform is simple, fast, and completely ad-free for a seamless browsing experience.</p>
+  </section>
+
+  <!-- Team Section -->
+  <section class="about-section">
+    <h2>Meet Our Team</h2>
+    <div class="team">
+      <div class="team-member">
+        <img src="{% static 'images/team-1.jpg' %}" alt="Team Member">
+        <h3>John Doe</h3>
+        <p>Founder & Developer</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static 'images/team-2.png' %}" alt="Team Member">
+        <h3>Sarah Lee</h3>
+        <p>Creative Director</p>
+      </div>
+      <div class="team-member">
+        <img src="{% static 'images/team-3.png' %}" alt="Team Member">
+        <h3>Mark Wilson</h3>
+        <p>Lead Photographer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>Join Our Community</h2>
+    <p>Start exploring thousands of free high-quality images today and bring your creative projects to life.</p>
+    <button onclick="location.href='{% url 'explore' %}'">Explore Photos</button>
+  </section>
+</div>
+{% endblock %}

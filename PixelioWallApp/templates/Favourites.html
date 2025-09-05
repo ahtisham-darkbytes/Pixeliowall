@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Favorites - Pixeliowall{% endblock %}
+
+{% block content %}
+   <!-- Main -->
+  <main class="main-content">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fa-solid fa-heart"></i> My Favorites</h2>
+        <p class="section-subtitle">Here are some of your saved images.</p>
+      </div>
+
+      <div class="masonry-grid fav-mansory" id="masonryGrid">
+        <!-- Images inserted by JS -->
+      </div>
+
+      <div class="loader" id="loader">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
+  <script>
+    const sampleImages = [
+      {
+        id: 1,
+        src: "{% static 'images/travel.webp' %}",
+        photographer: "John Doe",
+        alt: "Mountain landscape",
+        price: 10,
+        description:
+          "A breathtaking mountain landscape with peaks bathed in sunlight, perfect for adventure and nature lovers.",
+      },
+      {
+        id: 2,
+        src: "{% static 'images/7.webp' %}",
+        photographer: "Jane Smith",
+        alt: "Nature scene",
+        price: 0,
+        description:
+          "A peaceful nature scene with lush greenery, evoking calm and tranquility.",
+      },
+      {
+        id: 3,
+        src: "{% static 'images/8.webp' %}",
+        photographer: "Mike Johnson",
+        alt: "Ocean waves",
+        price: 5,
+        description:
+          "Gentle ocean waves rolling onto the shore under a bright, clear sky.",
+      },
+      {
+        id: 4,
+        src: "{% static 'images/9.webp' %}",
+        photographer: "Sarah Wilson",
+        alt: "Forest trees",
+        price: 0,
+        description:
+          "A dense forest with towering trees, showcasing the beauty and serenity of nature.",
+      },
+      {
+        id: 5,
+        src: "{% static 'images/technology.webp' %}",
+        photographer: "Sarah Wilson",
+        alt: "Technology",
+        price: 0,
+        description:
+          "A modern technology concept image showcasing innovation and creativity.",
+      },
+      {
+        id: 6,
+        src: "{% static 'images/greece.webp' %}",
+        photographer: "Sarah Wilson",
+        alt: "Greece landscape",
+        price: 0,
+        description:
+          "Beautiful view of Greece with coastal landscapes and historic charm.",
+      },
+    ]
+  </script>
+{% endblock %}

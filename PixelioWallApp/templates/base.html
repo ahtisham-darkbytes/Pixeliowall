@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}Pixeliowall - Free Stock Photos{% endblock %}
+    </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}" />
+    {% comment %}
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon-round.png' %}"
+      type="image/x-icon"
+    />
+    {% endcomment %}
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Masonry + imagesLoaded -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <h1>Pixeliowall</h1>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="desktop-nav">
+            <a
+              href="{% url 'home' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+              >Home</a
+            >
+            <a
+              href="{% url 'explore' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'explore' %}active{% endif %}"
+              >Explore</a
+            >
+            <a
+              href="{% url 'about' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+              >About</a
+            >
+            <a
+              href="{% url 'privacy' %}"
+              class="nav-link {% if request.resolver_match.url_name == 'privacy' %}active{% endif %}"
+              >Privacy Policy</a
+            >
+          </nav>
+
+          <!-- Desktop Actions -->
+          <div class="desktop-actions">
+            <button id="darkModeBtn" class="dark-toggle-btn">
+              <i class="fa-solid fa-sun icon-sun"></i>
+              <i class="fa-solid fa-moon icon-moon"></i>
+            </button>
+
+            <a
+              href="{% url 'favourites' %}"
+              class="favorites-icon"
+              title="Favorites"
+            >
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <button
+              class="btn-outline"
+              onclick="location.href='{% url 'login' %}'"
+            >
+              Log in
+            </button>
+
+            <!-- User Avatar Dropdown (for logged-in users) -->
+            <div class="user-dropdown">
+              <img
+                src="{% static 'images/team-1.jpg' %}"
+                alt="User Avatar"
+                class="avatar"
+                id="avatarBtn"
+              />
+              <div class="dropdown-menu" id="avatarMenu">
+                <a href="{% url 'profile' %}">Profile</a>
+                <a href="">Logout</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Heart + Menu -->
+          <div class="mobile-actions-bar">
+            <button id="darkModeBtnMobile" class="dark-toggle-btn">
+              <i class="fa-solid fa-sun icon-sun"></i>
+              <i class="fa-solid fa-moon icon-moon"></i>
+            </button>
+            <a
+              href="{% url 'favourites' %}"
+              class="favorites-icon mobile-fav"
+              title="Favorites"
+            >
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+              <span class="hamburger"></span>
+              <span class="hamburger"></span>
+              <span class="hamburger"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+          <nav class="mobile-nav">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'explore' %}" class="nav-link">Explore</a>
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+            <a href="{% url 'privacy' %}" class="nav-link">Privacy Policy</a>
+            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+
+            <div class="mobile-actions">
+              <button
+                class="btn-outline"
+                onclick="location.href='{% url 'login' %}'"
+              >
+                Log in
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Block -->
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2025 DarkBytes. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS -->
+
+    <script src="{% static 'js/mobilemenu.js' %}"></script>
+    <script src="{% static 'js/darkmode.js' %}" defer></script>
+    <script src="{% static 'js/sampledata.js' %}"></script>
+
+    {% block extra_scripts %} {% endblock %}
+  </body>
+</html>

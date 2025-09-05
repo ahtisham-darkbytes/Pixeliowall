@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment Success - Pixeliowall{% endblock %}
+
+{% block content %}
+  <!-- Payment Success Section -->
+  <section class="payment-status">
+    <div class="container">
+      <div class="status-container">
+        <div class="status-icon success-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 class="status-title">Payment Successful!</h2>
+        <p class="status-message">
+          Thank you for your purchase. Your payment has been processed successfully. 
+          You will receive a confirmation email shortly with details of your order.
+        </p>
+
+        <!-- Image below message -->
+        <div class="status-image">
+          <img src="{% static 'images/travel.webp' %}" alt="Thank You" />
+        </div>
+
+        <div class="button-group">
+          <a href="#" class="btn-generic button-filled">Download Content</a>
+          <a href="{% url 'explore' %}" class="btn-generic button-outline">Continue Browsing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

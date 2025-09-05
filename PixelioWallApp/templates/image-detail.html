@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pixeliowall - Image Details{% endblock %}
+
+{% block content %}
+  <!-- Main -->
+  <main class="detail-container">
+    <div id="imageDetail"></div>
+  </main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"));
+  const image = sampleImages.find(img => img.id === id);
+  const container = document.getElementById("imageDetail");
+  if (image) {
+    const isFree = image.price === 0;
+    container.innerHTML = `
+      <div class="detail-card">
+        <div class="detail-image">
+          <img src="${image.src}" alt="${image.alt}">
+        </div>
+        <div class="detail-info">
+          <h2>${image.alt}</h2>
+          <p><strong>Photographer:</strong> ${image.photographer}</p>
+          <p><strong>Price:</strong> ${isFree ? "Free" : "$" + image.price}</p>
+          <p class="detail-desc">${image.description}</p>
+          <div class="detail-actions">
+            ${
+              isFree
+                ? `<button class="btn-action download-btn">
+                     <i class="fa-solid fa-download"></i> Download
+                   </button>`
+                : `<button class="btn-action download-btn">
+                     <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                   </button>`
+            }
+            <button class="btn-action favorite-btn" data-id="${image.id}">
+              <i class="fa-regular fa-heart"></i> Add to Favorites
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `<p>Image not found</p>`;
+  }
+</script>
+{% endblock %}
