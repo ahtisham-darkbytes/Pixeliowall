@@ -35,3 +35,4 @@ def payment_failure(request):
 
 def image_detail(request):
     return render(request, "image-detail.html")
+

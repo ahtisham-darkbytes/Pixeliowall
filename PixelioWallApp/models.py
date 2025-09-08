@@ -24,7 +24,7 @@ class Image(models.Model):
     author = models.CharField(max_length=255, default="pixeliowall")
     image_short_description = models.CharField(max_length=1000, default="", blank=True)
     image_detailed_description = models.TextField(blank=True)
-    category = models.CharField(max_length=2000, blank=True)
+    category = models.CharField(max_length=2000) # -- required --
     original_image = models.ImageField(upload_to="original-images/")
     watermarked_image = models.ImageField(upload_to="watermarked-images/", default="none")
     alt_text = models.CharField(max_length=500, default="", blank=True)
@@ -36,7 +36,7 @@ class Image(models.Model):
         return f"{self.author} - {self.image_short_description[:30]}"
 
 
-class Favourite(models.Model):
+class Favourite(models.Model):  
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="favourite_entries")
     image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="favourite_entries")
