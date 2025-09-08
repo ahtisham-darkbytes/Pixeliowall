@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'PixelioWallApp'
 ]
 
+AUTH_USER_MODEL = "PixelioWallApp.CustomUser"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
