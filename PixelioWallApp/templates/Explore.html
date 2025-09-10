@@ -1,48 +1,67 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}Explore - Pixeliowall{% endblock %}
-
-{% block content %}
-  <!-- Explore Section -->
-  <main class="main-content">
-    <div class="container">
-      <div class="section-header">
-        <h3 class="section-title">Explore Categories</h3>
-        <p class="section-subtitle">Browse images by theme</p>
-      </div>
-
-      <div class="categories-grid">
-        <a href="{% url 'travel' %}" class="category-card" style="background-image: url('{% static 'images/travel2.webp' %}');">
-          <div class="category-overlay">
-            <h3>Travel</h3>
-          </div>
-        </a>
-
-        <a href="#" class="category-card" style="background-image: url('{% static 'images/art.webp' %}');">
-          <div class="category-overlay">
-            <h3>Art</h3>
-          </div>
-        </a>
-
-        <a href="#" class="category-card" style="background-image: url('{% static 'images/nature.webp' %}');">
-          <div class="category-overlay">
-            <h3>Nature</h3>
-          </div>
-        </a>
-
-        <a href="#" class="category-card" style="background-image: url('{% static 'images/food2.webp' %}');">
-          <div class="category-overlay">
-            <h3>Food</h3>
-          </div>
-        </a>
-
-        <a href="#" class="category-card" style="background-image: url('{% static 'images/technology.webp' %}');">
-          <div class="category-overlay">
-            <h3>Technology</h3>
-          </div>
-        </a>
-      </div>
+{% extends "base.html" %} {% load static %} {% block title %}Explore -
+Pixeliowall{% endblock %} {% block content %}
+<!-- Explore Section -->
+<main class="main-content">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Explore Our Collections</h2>
+      <p class="section-subtitle">
+        Each Pixeliowall collection tells a story that mirrors moods, styles,
+        and creativity in their finest form.
+      </p>
     </div>
-  </main>
+
+    <div class="categories-grid">
+      <a
+        href="{% url 'travel' %}"
+        class="category-card"
+        style="background-image: url('{% static 'images/travel2.webp' %}')"
+      >
+        <div class="category-overlay">
+          <h3>Travel</h3>
+        </div>
+      </a>
+
+      <a
+        href="#"
+        class="category-card"
+        style="background-image: url('{% static 'images/art.webp' %}')"
+      >
+        <div class="category-overlay">
+          <h3>Art</h3>
+        </div>
+      </a>
+
+      <a
+        href="#"
+        class="category-card"
+        style="background-image: url('{% static 'images/nature.webp' %}')"
+      >
+        <div class="category-overlay">
+          <h3>Nature</h3>
+        </div>
+      </a>
+
+      <a
+        href="#"
+        class="category-card"
+        style="background-image: url('{% static 'images/food2.webp' %}')"
+      >
+        <div class="category-overlay">
+          <h3>Food</h3>
+        </div>
+      </a>
+
+      <a
+        href="#"
+        class="category-card"
+        style="background-image: url('{% static 'images/technology.webp' %}')"
+      >
+        <div class="category-overlay">
+          <h3>Technology</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
 {% endblock %}

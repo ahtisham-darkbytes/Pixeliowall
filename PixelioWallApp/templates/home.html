@@ -1,14 +1,18 @@
-{% extends "base.html" %} {% load static %} {% block title %}Pixeliowall -
-Home{% endblock %} {% block content %}
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %} Pixeliowall - Home{% endblock %}
+{% block content %}
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="container">
     <div class="hero-content">
-      <h2 class="hero-title">
-        The best free stock photos, royalty free wallpapers shared by creators.
-      </h2>
+      <h1 class="hero-title">
+        Enter the world of Pixeliowall, where imagination becomes digital
+        reality.
+      </h1>
       <p class="hero-subtitle">
-        Over 3.2 million+ high quality wallpapers and images.
+        Explore high-quality Images and wallpapers that awaken creativity and
+        redefine your visual experience.
       </p>
 
       <form class="search-form" id="searchForm">
@@ -38,11 +42,11 @@ Home{% endblock %} {% block content %}
       <div class="trending">
         <p class="trending-label">Trending:</p>
         <div class="trending-tags">
-          <button class="trending-tag">Nature</button>
-          <button class="trending-tag">Business</button>
-          <button class="trending-tag">Food</button>
-          <button class="trending-tag">Travel</button>
+          <button class="trending-tag">AI Generated</button>
+          <button class="trending-tag">Wallpapers</button>
+          <button class="trending-tag">Sci-Fi</button>
           <button class="trending-tag">Technology</button>
+          <button class="trending-tag">Travel</button>
         </div>
       </div>
     </div>
@@ -77,14 +81,63 @@ Home{% endblock %} {% block content %}
     </div>
 
     <div class="section-header">
-      <h3 class="section-title">Free Stock Photos</h3>
+      <h3 class="section-title">Digital Artworks That Inspire</h3>
       <p class="section-subtitle">
-        Discover our collection of beautiful, high-quality images
+        Download free or unlock exclusive premium designs, carefully crafted to
+        elevate your digital world.
       </p>
     </div>
 
     <div class="masonry-grid" id="masonryGrid">
-      <!-- Images inserted by JS -->
+      {% for image in images %}
+      <div class="masonry-item">
+        <a href="{% url 'image-detail' %}?id={{ image.id }}">
+          <img
+            src="{{ image.original_image.url }}"
+            alt="{{ image.alt_text }}"
+            loading="lazy"
+          />
+
+          {% if image.is_paid %}
+          <div class="price-banner">${{ image.image_price }}</div>
+          {% endif %} {% if image.image_short_description %}
+          <div class="image-description">
+            {{ image.image_short_description }}
+          </div>
+          {% endif %}
+
+          <div class="image-overlay">
+            <div class="overlay-content">
+              <div class="photographer">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="7" r="4"></circle>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                </svg>
+                <span>{{ image.author }}</span>
+              </div>
+              <div class="image-actions">
+                <button class="action-btn like-btn" data-id="{{ image.id }}">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button
+                  class="action-btn download-btn"
+                  data-id="{{ image.id }}"
+                >
+                  <i class="fa-solid fa-download"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
     </div>
 
     <div id="loader" class="loader">
@@ -93,4 +146,9 @@ Home{% endblock %} {% block content %}
   </div>
 </section>
 <script src="{% static 'js/script.js' %}"></script>
-{% endblock %} {% block extra_scripts %} {% endblock %}
+{% endblock %} 
+{% block extra_scripts %} 
+<!-- Masonry + imagesLoaded -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+{% endblock %}

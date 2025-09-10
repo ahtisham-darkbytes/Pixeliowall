@@ -526,11 +526,30 @@ body {
 
 .footer-bottom p {
   margin: 0;
-  color: var(--muted-foreground);
+  color: var(--muted-foreground) !important;
   font-size: 0.9rem;
   letter-spacing: 0.5px;
 }
 
+.footer-bottom p a {
+  color: var(--secondary) !important;
+  text-decoration: none !important;
+}
+
+.footer-bottom p a:visited,
+.footer-bottom p a:active,
+.footer-bottom p a:focus {
+  text-decoration: none !important;
+}
+
+.footer-bottom p a:hover {
+  text-decoration: underline !important;
+}
+@media (max-width: 600px) {
+  .footer-bottom .footer-links {
+    display: block !important;
+  }
+}
 /* Auth pages */
 .auth-section {
   display: flex;
@@ -1382,6 +1401,11 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
+.btn-updateprofile {
+  display: block;
+  margin: 10px auto 0;
+  text-align: center;
+}
 /* Downloads Card */
 .downloads {
   background: #f9fafb;
@@ -1552,8 +1576,8 @@ body {
 }
 
 .avatar {
-  margin-left: .6rem;
-  margin-top: .4rem;
+  margin-left: 0.6rem;
+  margin-top: 0.4rem;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -1596,4 +1620,47 @@ body {
 /* Show dropdown when active */
 .user-dropdown.active .dropdown-menu {
   display: flex;
+}
+
+/* Policy Card */
+.policy-card {
+  background-color: #f9f9f9;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.policy-card h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  color: #222;
+}
+
+.policy-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555 !important;
+}
+
+.policy-card ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: #555;
+}
+
+.policy-card ul li {
+  margin-bottom: 8px;
+}
+
+/* Links */
+.policy-card a {
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.policy-card a:hover {
+  text-decoration: underline;
 }

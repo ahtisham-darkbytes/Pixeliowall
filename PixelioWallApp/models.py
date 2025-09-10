@@ -22,6 +22,7 @@ class CustomUser(AbstractUser):
 class Image(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.CharField(max_length=255, default="pixeliowall")
+    image_title = models.CharField(max_length=255) 
     image_short_description = models.CharField(max_length=1000, default="", blank=True)
     image_detailed_description = models.TextField(blank=True)
     category = models.CharField(max_length=2000) # -- required --

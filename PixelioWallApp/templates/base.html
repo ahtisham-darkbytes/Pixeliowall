@@ -7,6 +7,7 @@
     <title>
       {% block title %}Pixeliowall - Free Stock Photos{% endblock %}
     </title>
+    <script src="{% static 'js/darkmode.js' %}" defer></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
@@ -26,10 +27,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-
-    <!-- Masonry + imagesLoaded -->
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   </head>
 
   <body>
@@ -58,11 +55,13 @@
               class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
               >About</a
             >
+            {% comment %}
             <a
               href="{% url 'privacy' %}"
               class="nav-link {% if request.resolver_match.url_name == 'privacy' %}active{% endif %}"
               >Privacy Policy</a
             >
+            {% endcomment %}
           </nav>
 
           <!-- Desktop Actions -->
@@ -79,6 +78,7 @@
             >
               <i class="fa-regular fa-heart"></i>
             </a>
+
             <button
               class="btn-outline"
               onclick="location.href='{% url 'login' %}'"
@@ -128,7 +128,6 @@
             <a href="{% url 'home' %}" class="nav-link">Home</a>
             <a href="{% url 'explore' %}" class="nav-link">Explore</a>
             <a href="{% url 'about' %}" class="nav-link">About</a>
-            <a href="{% url 'privacy' %}" class="nav-link">Privacy Policy</a>
             <a href="{% url 'profile' %}" class="nav-link">Profile</a>
 
             <div class="mobile-actions">
@@ -151,16 +150,19 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-bottom">
-          <p>© 2025 DarkBytes. All rights reserved.</p>
+          <p>
+            © 2025 DarkBytes. All rights reserved. &nbsp;
+            <span class="footer-links">
+              <a href="{% url 'privacy' %}">Privacy Policy</a> |
+              <a href="{% url 'terms_and_conditions' %}">Terms & Conditions</a>
+            </span>
+          </p>
         </div>
       </div>
     </footer>
 
     <!-- JS -->
-
     <script src="{% static 'js/mobilemenu.js' %}"></script>
-    <script src="{% static 'js/darkmode.js' %}" defer></script>
-    <script src="{% static 'js/sampledata.js' %}"></script>
 
     {% block extra_scripts %} {% endblock %}
   </body>

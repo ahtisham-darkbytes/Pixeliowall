@@ -482,5 +482,34 @@ body.dark-mode .avatar {
   border-color: #6366f1; /* optional darker border for contrast */
 }
 
+body.dark-mode .policy-card {
+  background-color: #111827;
+  color: #f9fafb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .policy-card h2 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f3f4f6;
+}
+
+body.dark-mode .policy-card p,
+body.dark-mode .policy-card ul li {
+  color: #d1d5db !important;
+}
+
+body.dark-mode .policy-card ul li {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+body.dark-mode .policy-card a {
+  color: #60a5fa; /* links in blue for visibility */
+}
+
+body.dark-mode .policy-card a:hover {
+  text-decoration: underline;
+}
 
 

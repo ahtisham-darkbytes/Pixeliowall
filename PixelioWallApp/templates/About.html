@@ -1,15 +1,14 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}About - Pixeliowall{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}About -
+Pixeliowall{% endblock %} {% block content %}
 <!-- Hero -->
 <section class="about-hero">
   <div class="container">
     <div class="hero-content">
       <h1>About Pixeliowall</h1>
-      <p>Free high-quality stock photos and wallpapers shared by creators for creators.</p>
+      <p>
+        Pixeliowall exists to transform screens into canvases, blending AI
+        creativity, real photography, and premium artistry.
+      </p>
     </div>
   </div>
 </section>
@@ -18,31 +17,43 @@
 <div class="container">
   <section class="about-section">
     <h2>Our Mission</h2>
-    <p>Pixeliowall is dedicated to empowering creators by providing free, high-resolution photos and wallpapers
-      that can be used for personal or commercial projects. We aim to make beautiful imagery accessible to
-      everyone.</p>
+    <p>
+      To transform every screen into a canvas of imagination by blending AI
+      creativity, real photography, and premium artistry to inspire moods, spark
+      creativity, and redefine digital expression.
+    </p>
 
     <h2 style="margin-top: 2.5em">Why Choose Pixeliowall?</h2>
-    <p>We curate a wide variety of high-quality images, from stunning landscapes to lifestyle photography. Our
-      platform is simple, fast, and completely ad-free for a seamless browsing experience.</p>
+    <p>
+      Choosing Pixeliowall means choosing more than just wallpapers. It means
+      choosing experiences that match your mood and style. We combine AI
+      creativity with real photography to bring you collections that spark
+      imagination and change the way you see your screens. It gives free access
+      for all and premium exclusives for those who want more. Pixeliowall is a
+      space where art, innovation, and human creativity intersect. Every image
+      is crafted or selected with care to give you quality you can feel. Whether
+      you want something calming, bold, or inspiring, there is always a
+      collection waiting for you. Pixeliowall transforms screens into stories,
+      emotions, and expressions.
+    </p>
   </section>
 
   <!-- Team Section -->
   <section class="about-section">
-    <h2>Meet Our Team</h2>
+    <h2>Meet Our Creative Team</h2>
     <div class="team">
       <div class="team-member">
-        <img src="{% static 'images/team-1.jpg' %}" alt="Team Member">
+        <img src="{% static 'images/team-1.jpg' %}" alt="Team Member" />
         <h3>John Doe</h3>
         <p>Founder & Developer</p>
       </div>
       <div class="team-member">
-        <img src="{% static 'images/team-2.png' %}" alt="Team Member">
+        <img src="{% static 'images/team-2.png' %}" alt="Team Member" />
         <h3>Sarah Lee</h3>
         <p>Creative Director</p>
       </div>
       <div class="team-member">
-        <img src="{% static 'images/team-3.png' %}" alt="Team Member">
+        <img src="{% static 'images/team-3.png' %}" alt="Team Member" />
         <h3>Mark Wilson</h3>
         <p>Lead Photographer</p>
       </div>
@@ -51,9 +62,14 @@
 
   <!-- Call to Action -->
   <section class="cta">
-    <h2>Join Our Community</h2>
-    <p>Start exploring thousands of free high-quality images today and bring your creative projects to life.</p>
-    <button onclick="location.href='{% url 'explore' %}'">Explore Photos</button>
+    <h2>Be Part Of Pixeliowall</h2>
+    <p>
+      Unlock a world of stunning images and wallpapers. Browse free collections
+      or enjoy premium exclusives that fuel your creativity.
+    </p>
+    <button onclick="location.href='{% url 'explore' %}'">
+      Explore Photos
+    </button>
   </section>
 </div>
 {% endblock %}
