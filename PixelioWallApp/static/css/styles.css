@@ -296,7 +296,7 @@ body {
 
 .filter-btn.active {
   background-color: #007bff; /* modern blue */
-  color: #fff;
+  color: #fff !important;
   border-color: #007bff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

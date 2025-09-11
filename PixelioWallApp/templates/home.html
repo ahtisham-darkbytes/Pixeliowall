@@ -58,25 +58,21 @@
   <div class="container">
     <div class="filters-row">
       <div class="filter-buttons">
-        <button class="btn filter-btn btn-outline" data-filter="all">
-          All
-        </button>
-        <button class="btn filter-btn btn-outline" data-filter="free">
-          Free
-        </button>
-        <button class="btn filter-btn btn-outline" data-filter="paid">
-          Paid
-        </button>
+        <a href="?filter=all" class="btn filter-btn btn-outline{% if active_filter == 'all' %} active{% endif %}" data-filter="all">All</a>
+        <a href="?filter=free" class="btn filter-btn btn-outline{% if active_filter == 'free' %} active{% endif %}" data-filter="free">Free</a>
+        <a href="?filter=paid" class="btn filter-btn btn-outline{% if active_filter == 'paid' %} active{% endif %}" data-filter="paid">Paid</a>
       </div>
 
       <div class="filter-dropdowns">
-        <select id="sortFilter">
-          <option value="default" selected disabled hidden>Sort By</option>
-          <option value="price-asc">Price Low to High</option>
-          <option value="price-desc">Price High to Low</option>
-          <option value="date-desc">Date new to old</option>
-          <option value="date-asc">Date old to new</option>
-        </select>
+        <form id="sortForm" method="get" style="display:inline;">
+          <input type="hidden" name="filter" value="{{ active_filter }}" />
+          <select id="sortFilter" name="sortFilter" onchange="document.getElementById('sortForm').submit();">
+            <option value="date-desc" {% if active_sort == 'date-desc' %}selected{% endif %}>Date new to old</option>
+            <option value="date-asc" {% if active_sort == 'date-asc' %}selected{% endif %}>Date old to new</option>
+            <option value="price-asc" {% if active_sort == 'price-asc' %}selected{% endif %}>Price Low to High</option>
+            <option value="price-desc" {% if active_sort == 'price-desc' %}selected{% endif %}>Price High to Low</option>
+          </select>
+        </form>
       </div>
     </div>
 

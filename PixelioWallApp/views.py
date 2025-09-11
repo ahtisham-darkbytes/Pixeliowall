@@ -7,13 +7,37 @@ from django.http import JsonResponse
 from .models import Image, CustomUser, Favourite
 
 def home(request):
-    images = Image.objects.all().order_by("-created_at")
+    filter_type = request.GET.get("filter", "all")
+    sort_type = request.GET.get("sortFilter", "date-desc")
+
+    image_qs = Image.objects.all()
+    if filter_type == "free":
+        image_qs = image_qs.filter(is_paid=False)
+    elif filter_type == "paid":
+        image_qs = image_qs.filter(is_paid=True)
+
+    if sort_type == "price-asc":
+        image_qs = image_qs.order_by("image_price")
+    elif sort_type == "price-desc":
+        image_qs = image_qs.order_by("-image_price")
+    elif sort_type == "date-asc":
+        image_qs = image_qs.order_by("created_at")
+    else:  
+        image_qs = image_qs.order_by("-created_at")
+
+    images = image_qs
+
     favorite_image_ids = []
     if request.user.is_authenticated:
         favorite_image_ids = list(
             Favourite.objects.filter(user=request.user).values_list("image_id", flat=True)
         )
-    return render(request, "home.html", {"images": images, "favorite_image_ids": favorite_image_ids})
+    return render(request, "home.html", {
+        "images": images,
+        "favorite_image_ids": favorite_image_ids,
+        "active_filter": filter_type,
+        "active_sort": sort_type
+    })
 
 
 def image_detail(request, image_id):
