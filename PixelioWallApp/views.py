@@ -4,17 +4,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.db.models import Q
 from .models import Image, CustomUser, Favourite
 
 def home(request):
     filter_type = request.GET.get("filter", "all")
     sort_type = request.GET.get("sortFilter", "date-desc")
+    search_query = request.GET.get("search", "").strip()
 
     image_qs = Image.objects.all()
     if filter_type == "free":
         image_qs = image_qs.filter(is_paid=False)
     elif filter_type == "paid":
         image_qs = image_qs.filter(is_paid=True)
+
+    if search_query:
+        image_qs = image_qs.filter(
+            Q(image_title__icontains=search_query) |
+            Q(category__icontains=search_query) 
+        )
 
     if sort_type == "price-asc":
         image_qs = image_qs.order_by("image_price")
@@ -36,7 +44,8 @@ def home(request):
         "images": images,
         "favorite_image_ids": favorite_image_ids,
         "active_filter": filter_type,
-        "active_sort": sort_type
+        "active_sort": sort_type,
+        "search_query": search_query
     })
 
 

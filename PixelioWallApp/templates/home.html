@@ -15,14 +15,18 @@
         redefine your visual experience.
       </p>
 
-      <form class="search-form" id="searchForm">
+      <form class="search-form" id="searchForm" method="get">
         <div class="search-container">
           <input
             type="text"
             id="searchInput"
+            name="search"
+            value="{{ search_query }}"
             placeholder="Search for photos"
             class="search-input"
           />
+          <input type="hidden" name="filter" value="{{ active_filter }}" />
+          <input type="hidden" name="sortFilter" value="{{ active_sort }}" />
           <button type="submit" class="search-btn">
             <svg
               width="20"
