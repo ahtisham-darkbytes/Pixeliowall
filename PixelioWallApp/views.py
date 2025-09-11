@@ -182,7 +182,13 @@ def travel(request):
     return render(request, "travel.html")
 
 def profile(request):
-    return render(request, "Profile.html")
+    user = request.user
+    context = {
+        "name": f"{user.first_name} {user.last_name}",
+        "email": user.email,
+        "password": "",  # Do not expose password
+    }
+    return render(request, "Profile.html", context)
 
 def payment_success(request):
     return render(request, 'payment_success.html')
