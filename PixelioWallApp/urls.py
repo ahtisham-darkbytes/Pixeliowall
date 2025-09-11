@@ -10,10 +10,12 @@ urlpatterns = [
     path('favourites/', views.favourites, name='favourites'),
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
     path("travel/", views.travel, name="travel"), 
     path("profile/", views.profile, name="profile"),
     path('payment-success/', views.payment_success, name='payment_success'), 
     path('payment-failure/', views.payment_failure, name='payment_failure'),
-    path("image-detail/", views.image_detail, name="image-detail"),
+    path("image-detail/<uuid:image_id>/", views.image_detail, name="image-detail"),
+    path('toggle-favorite/', views.toggle_favorite, name='toggle_favorite'),
 
 ]

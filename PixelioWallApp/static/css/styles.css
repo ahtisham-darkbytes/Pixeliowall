@@ -1664,3 +1664,47 @@ body {
 .policy-card a:hover {
   text-decoration: underline;
 }
+
+/* Empty Favorites State */
+.empty-favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  grid-column: 1 / -1;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.empty-favorites h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.empty-favorites p {
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.empty-favorites .btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.empty-favorites .btn:hover {
+  background: #4f46e5;
+}

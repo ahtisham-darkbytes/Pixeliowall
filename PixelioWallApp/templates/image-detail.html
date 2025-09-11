@@ -1,5 +1,8 @@
-{% extends "base.html" %} {% load static %} {% block title %}Pixeliowall - Image
-Details{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Pixeliowall - Image Details{% endblock %}
+
+{% block content %}
 <main class="detail-container">
   <div class="detail-card">
     <div class="detail-image">
@@ -10,30 +13,138 @@ Details{% endblock %} {% block content %}
       <p><strong>Photographer:</strong> {{ image.author }}</p>
       <p>
         {% if image.is_paid %}
-        <strong>Price:</strong>
-        ${{ image.image_price }} {% endif %}
+          <strong>Price:</strong> ${{ image.image_price }}
+        {% endif %}
       </p>
       {% if image.image_short_description %}
-      <p class="detail-desc">{{ image.image_detailed_description }}</p>
+        <p class="detail-desc">{{ image.image_detailed_description }}</p>
       {% endif %}
 
       <div class="detail-actions">
         {% if image.is_paid %}
-        <button class="btn-action download-btn" data-id="{{ image.id }}">
-          <i class="fa-solid fa-cart-shopping"></i> Buy Now
-        </button>
+          <button class="btn-action download-btn" data-id="{{ image.id }}">
+            <i class="fa-solid fa-cart-shopping"></i> Buy Now
+          </button>
         {% else %}
-        <button class="btn-action download-btn" data-id="{{ image.id }}">
-          <i class="fa-solid fa-download"></i> Download
-        </button>
+          <button class="btn-action download-btn" data-id="{{ image.id }}">
+            <i class="fa-solid fa-download"></i> Download
+          </button>
         {% endif %}
-        <button class="btn-action favorite-btn" data-id="{{ image.id }}">
-          <i class="fa-regular fa-heart"></i> Add to Favorites
-        </button>
+
+        <!-- ✅ Favorites button with toggle -->
+        <form style="display:inline;">
+          {% csrf_token %}
+          <button type="button"
+                  class="btn-action favorite-btn"
+                  data-id="{{ image.id }}"
+                  onclick="toggleFavorite(event, this)">
+            {% if is_favorite %}
+              <i class="fa-solid fa-heart"></i> Added
+            {% else %}
+              <i class="fa-regular fa-heart"></i> Add to Favorites
+            {% endif %}
+          </button>
+        </form>
       </div>
     </div>
   </div>
 </main>
-{% endblock %} {% block extra_scripts %}
-<script src="{% static 'js/detail.js' %}"></script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function toggleFavorite(event, button) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const imageId = button.getAttribute('data-id');
+    const heartIcon = button.querySelector('i');
+
+    // Loading state
+    button.disabled = true;
+    heartIcon.className = 'fa-solid fa-spinner fa-spin';
+
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (!csrfToken) {
+        console.error('CSRF token not found');
+        showNotification('Security error. Please refresh the page.', 'error');
+        return;
+    }
+
+    fetch('{% url "toggle_favorite" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken.value
+        },
+        body: `image_id=${imageId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            if (data.action === 'added') {
+                heartIcon.className = 'fa-solid fa-heart';
+                button.innerHTML = '<i class="fa-solid fa-heart"></i> Added';
+                button.style.color = '#ff4757';
+            } else {
+                heartIcon.className = 'fa-regular fa-heart';
+                button.innerHTML = '<i class="fa-regular fa-heart"></i> Add to Favorites';
+                button.style.color = '';
+            }
+            showNotification(data.message, 'success');
+        } else {
+            showNotification(data.error || 'Something went wrong', 'error');
+            heartIcon.className = 'fa-regular fa-heart';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Network error. Please try again.', 'error');
+        heartIcon.className = 'fa-regular fa-heart';
+    })
+    .finally(() => {
+        button.disabled = false;
+    });
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+
+  let bgColor = '#2ed573';
+  if (type === 'error' || message.toLowerCase().includes('removed from favorites')) {
+    bgColor = '#ff4757';
+  }
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${bgColor};
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+    
+}
+</script>
 {% endblock %}

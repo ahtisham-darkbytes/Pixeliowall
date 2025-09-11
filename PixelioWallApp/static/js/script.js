@@ -13,18 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     msnry.layout();
   });
 
-  // Bind like/download buttons
-  document.querySelectorAll(".like-btn").forEach((btn) => {
-    btn.onclick = (e) => {
-      e.stopPropagation();
-      alert(`Liked image ${btn.dataset.id}`);
-    };
-  });
-
+  // Bind download buttons (like buttons are handled inline)
   document.querySelectorAll(".download-btn").forEach((btn) => {
     btn.onclick = (e) => {
       e.stopPropagation();
-      alert(`Downloading image ${btn.dataset.id}...`);
+      // Download functionality can be added here later
+      console.log(`Downloading image ${btn.dataset.id}...`);
     };
   });
 });

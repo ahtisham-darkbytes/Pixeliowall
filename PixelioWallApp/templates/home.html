@@ -88,10 +88,11 @@
       </p>
     </div>
 
+    {% csrf_token %}
     <div class="masonry-grid" id="masonryGrid">
       {% for image in images %}
       <div class="masonry-item">
-        <a href="{% url 'image-detail' %}?id={{ image.id }}">
+      <a href="{% url 'image-detail' image.id %}">
           <img
             src="{{ image.original_image.url }}"
             alt="{{ image.alt_text }}"
@@ -123,12 +124,21 @@
                 <span>{{ image.author }}</span>
               </div>
               <div class="image-actions">
-                <button class="action-btn like-btn" data-id="{{ image.id }}">
-                  <i class="fa-regular fa-heart"></i>
-                </button>
+                {% if user.is_authenticated %}
+                  {% if image.id in favorite_image_ids %}
+                    <button class="action-btn like-btn" data-id="{{ image.id }}" onclick="toggleFavorite(event, this)" style="color: #ff4757;">
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  {% else %}
+                    <button class="action-btn like-btn" data-id="{{ image.id }}" onclick="toggleFavorite(event, this)">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  {% endif %}
+                {% endif %}
                 <button
                   class="action-btn download-btn"
                   data-id="{{ image.id }}"
+                  onclick="event.preventDefault(); event.stopPropagation();"
                 >
                   <i class="fa-solid fa-download"></i>
                 </button>
@@ -151,4 +161,112 @@
 <!-- Masonry + imagesLoaded -->
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<script>
+function toggleFavorite(event, button) {
+    // Prevent the link from opening
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const imageId = button.getAttribute('data-id');
+    const heartIcon = button.querySelector('i');
+    
+    console.log('Toggle favorite clicked for image:', imageId);
+    
+    // Show loading state
+    button.disabled = true;
+    heartIcon.className = 'fa-solid fa-spinner fa-spin';
+    
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (!csrfToken) {
+        console.error('CSRF token not found');
+        showNotification('Security error. Please refresh the page.', 'error');
+        return;
+    }
+    
+    fetch('{% url "toggle_favorite" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken.value
+        },
+        body: `image_id=${imageId}`
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        if (data.success) {
+            // Toggle heart icon
+            if (data.action === 'added') {
+                heartIcon.className = 'fa-solid fa-heart';
+                button.style.color = '#ff4757';
+            } else {
+                heartIcon.className = 'fa-regular fa-heart';
+                button.style.color = '';
+            }
+            
+            // Show subtle notification (no alert)
+            showNotification(data.message, 'success');
+        } else {
+            showNotification(data.error || 'Something went wrong', 'error');
+            // Reset to original state
+            heartIcon.className = 'fa-regular fa-heart';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Network error. Please try again.', 'error');
+        heartIcon.className = 'fa-regular fa-heart';
+    })
+    .finally(() => {
+        button.disabled = false;
+    });
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    // Style the notification
+  let bgColor = '#2ed573';
+  if (type === 'error' || message.toLowerCase().includes('removed from favorites')) {
+    bgColor = '#ff4757';
+  }
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${bgColor};
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+</script>
 {% endblock %}
