@@ -52,7 +52,7 @@ def toggle_favorite(request):
     print(f"Toggle favorite request: {request.method}, User: {request.user}, Authenticated: {request.user.is_authenticated}")
     
     if not request.user.is_authenticated:
-        return JsonResponse({'error': 'Authentication required'}, status=401)
+        return JsonResponse({'error': 'Login required'}, status=401)
     
     if request.method == 'POST':
         image_id = request.POST.get('image_id')
@@ -186,7 +186,6 @@ def profile(request):
     context = {
         "name": f"{user.first_name} {user.last_name}",
         "email": user.email,
-        "password": "",  # Do not expose password
     }
     return render(request, "Profile.html", context)
 
