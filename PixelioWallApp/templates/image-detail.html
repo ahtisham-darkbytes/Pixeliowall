@@ -25,22 +25,15 @@
       </p>
 
       <div class="detail-actions">
-    {% if image.is_paid %}
-        {% if user.is_authenticated %}
-            <button class="btn-action download-btn" data-id="{{ image.id }}">
-                <i class="fa-solid fa-cart-shopping"></i> Buy Now
-            </button>
+        {% if image.is_paid %}
+          <button class="btn-action download-btn" data-id="{{ image.id }}">
+            <i class="fa-solid fa-cart-shopping"></i> Buy Now
+          </button>
         {% else %}
-            <a href="{% url 'login' %}" class="btn-action download-btn">
-                <i class="fa-solid fa-cart-shopping"></i> Login to Buy
-            </a>
-        {% endif %}
-    {% else %}
-        <button class="btn-action download-btn" data-id="{{ image.id }}">
+          <button class="btn-action download-btn" data-id="{{ image.id }}">
             <i class="fa-solid fa-download"></i> Download
-        </button>
-    {% endif %}
-</div>
+          </button>
+        {% endif %}
 
         <!-- ✅ Favorites button with toggle -->
         <form style="display:inline;">
