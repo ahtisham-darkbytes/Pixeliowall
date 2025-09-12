@@ -25,7 +25,7 @@
 
     <input type="file" id="profile-pic" name="profile_picture" accept="image/*" hidden>
     <label for="profile-pic" class="custom-file-upload">
-      <i class="fa fa-upload"></i> Choose File
+      <i class="fa fa-upload"></i> Change Profile Picture
     </label>
 
     <!-- Preview -->
@@ -90,5 +90,61 @@ fileInput.addEventListener("change", function () {
   }
 });
 
+// Toast notification logic (success/error)
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+
+    let bgColor = '#2ed573';
+    if (type === 'error' || message.toLowerCase().includes('error')) {
+      bgColor = '#ff4757';
+    }
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${bgColor};
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Show Django messages as toast notifications
+document.addEventListener('DOMContentLoaded', function() {
+  const djangoMessages = document.querySelectorAll('.messages .alert, .messages .error, .messages .success');
+  djangoMessages.forEach(function(msg) {
+    let type = 'success';
+    if (msg.classList.contains('error') || msg.classList.contains('alert-danger')) type = 'error';
+    showNotification(msg.textContent, type);
+  });
+
+  // If Django messages are not rendered as .messages, check for context variable
+  {% if messages %}
+    {% for message in messages %}
+      showNotification("{{ message|escapejs }}", "{{ message.tags|default:'success' }}");
+    {% endfor %}
+  {% endif %}
+});
 </script>
 {% endblock %}

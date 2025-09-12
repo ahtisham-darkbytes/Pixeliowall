@@ -10,26 +10,37 @@
     </div>
     <div class="detail-info">
       <h2>{{ image.image_title }}</h2>
-      <p><strong>Photographer:</strong> {{ image.author }}</p>
+      <p><strong>Uploaded by  :</strong> {{ image.author }}</p>
       <p>
         {% if image.is_paid %}
           <strong>Price:</strong> ${{ image.image_price }}
         {% endif %}
       </p>
-      {% if image.image_short_description %}
-        <p class="detail-desc">{{ image.image_detailed_description }}</p>
-      {% endif %}
+     <p class="detail-desc">
+        {% if image.image_detailed_description %}
+        {{ image.image_detailed_description }}
+        {% else %}
+        {{ image.image_short_description }}
+        {% endif %}
+      </p>
 
       <div class="detail-actions">
-        {% if image.is_paid %}
-          <button class="btn-action download-btn" data-id="{{ image.id }}">
-            <i class="fa-solid fa-cart-shopping"></i> Buy Now
-          </button>
+    {% if image.is_paid %}
+        {% if user.is_authenticated %}
+            <button class="btn-action download-btn" data-id="{{ image.id }}">
+                <i class="fa-solid fa-cart-shopping"></i> Buy Now
+            </button>
         {% else %}
-          <button class="btn-action download-btn" data-id="{{ image.id }}">
-            <i class="fa-solid fa-download"></i> Download
-          </button>
+            <a href="{% url 'login' %}" class="btn-action download-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Login to Buy
+            </a>
         {% endif %}
+    {% else %}
+        <button class="btn-action download-btn" data-id="{{ image.id }}">
+            <i class="fa-solid fa-download"></i> Download
+        </button>
+    {% endif %}
+</div>
 
         <!-- ✅ Favorites button with toggle -->
         <form style="display:inline;">

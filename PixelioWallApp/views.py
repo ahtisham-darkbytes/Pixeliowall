@@ -229,6 +229,7 @@ def profile(request):
             user.profile_picture = request.FILES["profile_picture"]
 
         user.save()
+        messages.success(request, "Profile updated successfully!")
         return redirect("profile")
 
     context = {
