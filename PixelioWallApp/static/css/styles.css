@@ -556,112 +556,150 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 2rem;
-  min-height: 90vh; /* full height */
-  position: relative; /* needed for pseudo-element */
-  box-sizing: border-box;
-  color: #fff; /* text color */
-  overflow: hidden;
+  padding: 2.5rem 1rem;
+  min-height: 90vh;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 60%);
 }
 
-/* Background image with blur and greyscale */
-.auth-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url(../images/pexels-goldcircuits-2425012.webp) center/cover
-    no-repeat;
-  filter: grayscale(100%) blur(4px); /* adjust blur as needed */
-  z-index: -1; /* keep it behind content */
-}
-
-/* Glassmorphism Card */
+/* Card */
 .auth-card {
-  max-width: 500px;
+  max-width: 640px;
   width: 100%;
   margin: 0 auto;
-  min-height: 500px; /* adjust as needed */
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 1rem;
-  padding: 2.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-align: center;
-  animation: fadeInUp 0.6s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* vertically centers content */
+  padding: 2.25rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(31, 41, 55, 0.06);
 }
 
 .auth-title {
   font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #fff;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  text-align: center;
 }
 
-/* Inputs */
+.auth-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Form */
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.inputs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+
+.input-control {
+  position: relative;
+  display: flex;
   align-items: center;
 }
 
-.auth-form input {
-  padding: 1rem 1.25rem;
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.input-control input {
   width: 100%;
-  max-width: 400px;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.85);
-  transition: all 0.3s ease;
-}
-
-.auth-form input:focus {
-  outline: none;
+  padding: 0.85rem 0.95rem 0.85rem 2.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.auth-form button {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 0.85rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* subtle border */
-  border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.15); /* transparent white */
-  color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  backdrop-filter: blur(4px); /* glass effect */
-  transition: all 0.3s ease;
+.input-control input::placeholder {
+  color: #9ca3af;
 }
 
-.auth-form button:hover {
-  background: rgba(255, 255, 255, 0.25); /* slightly stronger on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+.input-control input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
 }
 
-.auth-footer a {
-  color: #fff; /* default link color */
-  text-decoration: none; /* no underline by default */
-  font-weight: 600;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
+.btn-auth {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: 0.5rem auto 0;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #111827 0%, #374151 100%);
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
 
-.auth-footer a:hover {
-  color: rgba(255, 255, 255, 0.9); /* slightly brighter on hover */
-  text-decoration: underline; /* underline appears on hover */
+.btn-auth:hover {
+  filter: brightness(1.05);
 }
 
-.auth-footer a:visited {
-  color: rgba(255, 255, 255, 0.7); /* dimmer if already visited */
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 0.5rem 0 0.25rem 0;
+}
+
+.divider span {
+  display: inline-block;
+  padding: 0 0.75rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  background: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.auth-meta {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.auth-meta a {
+  color: #4f46e5;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-meta a:hover {
+  text-decoration: underline;
 }
 
 .main-content {
@@ -1403,8 +1441,69 @@ body {
 
 .btn-updateprofile {
   display: block;
-  margin: 10px auto 0;
+  margin: 30px auto 0;
   text-align: center;
+}
+
+.profile-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-family: Arial, sans-serif;
+  max-width: 320px;
+  margin: auto;
+  width: 100%;
+}
+
+.upload-label {
+  font-weight: 600;
+  font-size: 1rem;
+  align-self: flex-start;
+}
+
+/* Full-width button */
+.custom-file-upload {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, #6366f1 0%, #374151 100%);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+.preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+#preview-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+#file-name {
+  color: #6366f1;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.preview p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #444;
+  word-break: break-word;
 }
 /* Downloads Card */
 .downloads {
@@ -1585,7 +1684,6 @@ body {
   border: 2px solid #4f46e5; /* subtle border for better visibility */
   transition: transform 0.2s ease;
   object-fit: cover;
-
 }
 
 .avatar:hover {

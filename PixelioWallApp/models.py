@@ -12,7 +12,7 @@ THEME_CHOICES = [
 
 class CustomUser(AbstractUser):
         id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-        profile_picture = models.ImageField(upload_to="profile/", default="avatar.png")
+        profile_picture = models.ImageField(upload_to="profile/", default="profile/team-1.jpg")
         selected_theme = models.CharField(max_length=100, choices=THEME_CHOICES, default="dark")
         favourites = models.ManyToManyField("Image", through="Favourite", related_name="favourited_by")
 

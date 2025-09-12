@@ -214,13 +214,30 @@ def logout_view(request):
 def travel(request):
     return render(request, "travel.html")
 
+
+@login_required
 def profile(request):
     user = request.user
+
+    if request.method == "POST":
+        # Update first/last name from your inputs
+        user.first_name = request.POST.get("first_name", user.first_name)
+        user.last_name = request.POST.get("last_name", user.last_name)
+
+        # Handle uploaded file
+        if request.FILES.get("profile_picture"):
+            user.profile_picture = request.FILES["profile_picture"]
+
+        user.save()
+        return redirect("profile")
+
     context = {
         "name": f"{user.first_name} {user.last_name}",
         "email": user.email,
+        "user": user,
     }
     return render(request, "Profile.html", context)
+
 
 def payment_success(request):
     return render(request, 'payment_success.html')

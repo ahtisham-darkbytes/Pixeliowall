@@ -1,25 +1,44 @@
-{% extends "base.html" %} 
-{% load static %} 
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <!-- Profile Section -->
 <div class="profile-container">
   <!-- User Details -->
   <div class="profile-details">
     <h2>My Profile</h2>
-    <form>
-  <label for="name">Full Name</label>
-  <input type="text" id="name" value="{{ name }}" />
+ <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
 
-  <label for="email">Email</label>
-  <input type="email" id="email" value="{{ email }}" readOnly />
+  <!-- Name fields -->
+  <label for="first_name">First Name</label>
+  <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
 
-      <label for="profile-pic">Profile Picture</label>
-     <input type="file" id="profile-pic" accept="image/*" />
-      <button type="submit" class="btn-generic btn-updateprofile button-filled">
-        Update Profile
-      </button>
-    </form>
+  <label for="last_name">Last Name</label>
+  <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+
+  <!-- Email (readonly) -->
+  <label>Email</label>
+  <input type="email" value="{{ user.email }}" readonly>
+
+  <!-- Profile Picture -->
+  <div class="profile-upload">
+    <label class="upload-label">Profile Picture</label>
+
+    <input type="file" id="profile-pic" name="profile_picture" accept="image/*" hidden>
+    <label for="profile-pic" class="custom-file-upload">
+      <i class="fa fa-upload"></i> Choose File
+    </label>
+
+    <!-- Preview -->
+    <div class="preview" id="preview-box" style="margin-top: 1rem; text-align: center">
+      <img id="preview-img" src="{{ user.profile_picture.url }}" alt="Current Profile" width="120">
+      <p id="file-name"></p>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-generic btn-updateprofile button-filled">
+    Update Profile
+  </button>
+</form>
   </div>
 
   <!-- Downloaded Items -->
@@ -38,14 +57,38 @@
         <img src="{%static 'images/art.webp' %}" alt="Downloaded Item" />
         <p>City Skyline</p>
       </div>
-      {% comment %} <div class="download-item">
+      {% comment %}
+      <div class="download-item">
         <img src="{%static 'images/desert.webp' %}" alt="Downloaded Item" />
         <p>Forest Path</p>
-      </div> {% endcomment %}
+      </div>
+      {% endcomment %}
     </div>
   </div>
-
- 
 </div>
 
+{% endblock %} {% block extra_scripts %}
+<script>
+const fileInput = document.getElementById("profile-pic");
+const previewBox = document.getElementById("preview-box");
+const previewImg = document.getElementById("preview-img");
+const fileNameText = document.getElementById("file-name");
+
+fileInput.addEventListener("change", function () {
+  if (this.files[0]) {
+    fileNameText.textContent = this.files[0].name;
+    previewBox.style.display = "block";
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+  } else {
+    previewBox.style.display = "none";
+    previewImg.src = "";
+    fileNameText.textContent = "";
+  }
+});
+
+</script>
 {% endblock %}

@@ -273,63 +273,68 @@ body.dark-mode .downloads h2 {
 }
 
 /* Dark Mode - Auth Pages */
+/* Auth section dark surface */
 body.dark-mode .auth-section {
-  color: #111827; /* text color for readability */
+  background: linear-gradient(180deg, #0b1220 0%, #111827 60%);
 }
 
-/* Glassmorphism Card */
+/* Card */
 body.dark-mode .auth-card {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.15
-  ); /* keep same semi-transparent glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  color: #111827; /* text inside card */
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
 }
 
-/* Titles */
 body.dark-mode .auth-title {
-  color: #111827;
+  color: #e5e7eb;
+}
+
+body.dark-mode .auth-subtitle {
+  color: #9ca3af;
 }
 
 /* Inputs */
-body.dark-mode .auth-form input {
-  background: rgba(255, 255, 255, 0.29);
-  color: #111827;
+body.dark-mode .input-control input {
+  background: #0b1220;
+  border-color: #1f2a44;
+  color: #e5e7eb;
 }
 
-body.dark-mode .auth-form input:focus {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.4);
+body.dark-mode .input-control input::placeholder {
+  color: #64748b;
 }
 
-/* Buttons */
-body.dark-mode .auth-form button {
-  background: rgba(255, 255, 255, 0.15);
-  color: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+body.dark-mode .input-field label {
+  color: #cbd5e1;
 }
 
-body.dark-mode .auth-form button:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+body.dark-mode .input-icon {
+  color: #64748b;
 }
 
-/* Footer links */
-body.dark-mode .auth-footer a {
-  color: #111827;
+/* Button */
+body.dark-mode .btn-auth {
+  background: linear-gradient(90deg, #1f2937 0%, #374151 100%);
+  color: #e5e7eb;
+  max-width: 420px; /* keep centered sizing in dark too */
 }
 
-body.dark-mode .auth-footer a:hover {
-  color: rgba(17, 24, 39, 0.9);
+/* Meta */
+body.dark-mode .divider::before {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-body.dark-mode .auth-footer a:visited {
-  color: rgba(17, 24, 39, 0.7);
+body.dark-mode .divider span {
+  background: #0f172a;
+  color: #94a3b8;
+}
+
+body.dark-mode .auth-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .auth-meta a {
+  color: #60a5fa;
 }
 
 body.dark-mode .filter-buttons .filter-btn {
