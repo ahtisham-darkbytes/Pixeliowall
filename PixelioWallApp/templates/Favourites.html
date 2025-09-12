@@ -16,7 +16,7 @@
         {% if favorites %}
           {% for image in favorites %}
           <div class="masonry-item">
-            <a href="{% url 'image-detail' image.id %}">
+            <a href="{% url 'image-detail' image.slug %}">
               <img
                 src="{{ image.original_image.url }}"
                 alt="{{ image.alt_text }}"

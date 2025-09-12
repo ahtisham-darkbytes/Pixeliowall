@@ -15,7 +15,7 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path('payment-success/', views.payment_success, name='payment_success'), 
     path('payment-failure/', views.payment_failure, name='payment_failure'),
-    path("image-detail/<uuid:image_id>/", views.image_detail, name="image-detail"),
+    path("image-detail/<slug:slug>/", views.image_detail, name="image-detail"),
     path('toggle-favorite/', views.toggle_favorite, name='toggle_favorite'),
 
 ]

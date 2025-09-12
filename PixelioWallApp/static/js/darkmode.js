@@ -35,15 +35,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // avatar dropdown menuconst avatarBtn = document.getElementById("avatarBtn");
-const userDropdown = avatarBtn?.parentElement;
+document.addEventListener("DOMContentLoaded", () => {
+  const avatarBtn = document.getElementById("avatarBtn");
+  if (!avatarBtn) return; // user is not logged in, nothing to do
 
-avatarBtn?.addEventListener("click", () => {
-  userDropdown.classList.toggle("active");
-});
+  const userDropdown = avatarBtn.parentElement;
 
-window.addEventListener("click", (e) => {
-  if (userDropdown && !userDropdown.contains(e.target)) {
-    userDropdown.classList.remove("active");
-  }
+  avatarBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent the window click from closing it immediately
+    userDropdown.classList.toggle("active");
+  });
+
+  window.addEventListener("click", (e) => {
+    if (!userDropdown.contains(e.target)) {
+      userDropdown.classList.remove("active");
+    }
+  });
 });
 

@@ -49,8 +49,8 @@ def home(request):
     })
 
 
-def image_detail(request, image_id):
-    image = get_object_or_404(Image, id=image_id)
+def image_detail(request, slug):
+    image = get_object_or_404(Image, slug=slug)
     is_favorite = False
     if request.user.is_authenticated:
         is_favorite = Favourite.objects.filter(user=request.user, image=image).exists()
